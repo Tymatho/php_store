@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/functions/error.php';
+require_once __DIR__ . '/classes/Database.php';
 require_once __DIR__ . '/layout/header.php';
 ?>
 
@@ -18,20 +19,30 @@ require_once __DIR__ . '/layout/header.php';
             <input type="text" name="name" id="name" />
         </div>
         <div>
-            <label for="name">Prix :</label>
+            <label for="price">Prix :</label>
             <input type="text" name="price_vat_free" id="name" />
         </div>
         <div>
-            <label for="name">Cover :</label>
+            <label for="cover">Cover :</label>
             <input type="text" name="cover" id="name" />
         </div>
         <div>
-            <label for="name">Description :</label>
+            <label for="description">Description :</label>
             <input type="text" name="description" id="name" />
         </div>
         <div>
-            <label for="name">Category id :</label>
-            <input type="text" name="category_id" id="name" />
+            <label for="category_id">Category id :</label>
+            <select name="category_id" id="category-select">
+                <option value="">--Catégories--</option>
+                <?php 
+                    $pdo= Database::getConnection();
+                    $query = $pdo-> prepare("SELECT * FROM category");
+                    $stmt = $query->execute(); 
+                while ($result = $query->fetch()) {
+                    echo '<option value="'.$result['id'].'">'.$result['name'].'</option>'; 
+                }
+                ?>
+            </select>
         </div>
         <div>
             <input type="submit" value="Enregistrer" />
