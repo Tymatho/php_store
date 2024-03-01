@@ -12,5 +12,9 @@
 
 <body>
     <header>
-    
+    <?php session_start()
+    if(isset($_SESSION['message']) && !empty($_SESSION['message'])){
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
     </header>

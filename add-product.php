@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/functions/error.php';
 require_once __DIR__ . '/classes/Database.php';
+require_once __DIR__ . '/classes/Categories.php';
 require_once __DIR__ . '/layout/header.php';
 ?>
 
@@ -35,11 +36,9 @@ require_once __DIR__ . '/layout/header.php';
             <select name="category_id" id="category-select">
                 <option value="">--Catégories--</option>
                 <?php 
-                    $pdo= Database::getConnection();
-                    $query = $pdo-> prepare("SELECT * FROM category");
-                    $stmt = $query->execute(); 
-                while ($result = $query->fetch()) {
-                    echo '<option value="'.$result['id'].'">'.$result['name'].'</option>'; 
+                    $categories = Categories::findAll();
+                    foreach($categories as $category) {
+                    echo '<option value="'.$category['id'].'">'.$category['name'].'</option>'; 
                 }
                 ?>
             </select>

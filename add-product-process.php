@@ -15,7 +15,7 @@ $productName = trim($_POST['name']);
 $productPrice = trim($_POST['price_vat_free']);
 $productCover = trim($_POST['cover']);
 $productDescription = trim($_POST['description']);
-$categoryId = trim($_POST['category_id']);
+$categoryId = $_POST['category_id'];
 
 if (empty($productName) || empty($productPrice) || empty($productCover) || empty($productDescription) || empty($categoryId)) {
     redirect('add-product.php?error=' . ProductError::PARAMETERS_REQUIRED);
@@ -29,12 +29,11 @@ try {
 }
 
 try {
-$stmt = $pdo->prepare("INSERT INTO product (name, price_vat_free, cover, description, category_id) 
-VALUES (:productName, :productPrice, :productCover, :productDescription, :categoryId)");
-$stmt->execute(
-    ['productName' => $productName, 'productPrice' => $productPrice, 'productCover' => $productCover, 'productDescription' => $productDescription,
-'categoryId' => $categoryId]
-);
+    $stmt = $pdo->prepare("INSERT INTO product (name, price_vat_free, cover, description, category_id) 
+    VALUES (:productName, :productPrice, :productCover, :productDescription, :categoryId)");
+    $stmt->execute(
+        ['productName' => $productName, 'productPrice' => $productPrice, 'productCover' => $productCover, 'productDescription' => $productDescription,
+    'categoryId' => $categoryId]);
 } catch (PDOException $ex) {
     echo "Erreur lors de l'insertion des données";
     exit;
@@ -44,5 +43,6 @@ if ($stmt === false) {
     echo "Erreur lors de la requête";
     exit;
 }
-
-echo "OK ! Catégorie enregistrée";
+session_start();
+$_SESSION['message'] = "Produit enregistré";
+redirect('/');

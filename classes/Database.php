@@ -2,6 +2,11 @@
 
 class Database
 {
+    private function __construct(){
+
+    }
+
+    private static ?PDO $instance = null;
     // TODO: Implement singleton pattern
     public static function getConnection(): PDO
     {
@@ -16,6 +21,9 @@ class Database
         
         $dsn = "mysql:host=$dbHost;port=$dbPort;dbname=$dbName;charset=$dbCharset";
         
-        return new PDO($dsn, $dbUser, $dbPassword);
+        if(self::$instance === null){
+            self::$instance = new PDO($dsn, $dbUser, $dbPassword);
+        }
+        return self::$instance;
     }
 }
