@@ -1,14 +1,34 @@
 <?php
 require_once __DIR__ . '/classes/Products.php';
+require_once __DIR__ . '/classes/Settings.php';
 require_once __DIR__ . '/layout/header.php';
 ?>
 
 <h1>Catégories</h1>
 
 <?php
+if (!isset($_GET['page'])){
+  $_GET['page']=1;
+}
+$productPerPage = intval(Settings::getSettings()['PRODUCT_PAGE_COUNT']);
+$offset = ($_GET['page'] - 1) * $productPerPage;
 $productsDb = new Products();
-$products = $productsDb->findAll();
+$products = $productsDb->findWithOffset($productPerPage, $offset);
 ?>
+
+<div class="list-container">
+    <div class="list-header">
+        <div>ID</div>
+        <div>Nom</div>
+    </div>
+
+    <?php foreach ($products as $product) { ?>
+    <div class="product-item">
+        <div><?php echo $product['id']; ?></div>
+        <div><a href="product.php?id=<?php echo $product['id']; ?>"><?php echo $product['name']; ?></a></div>
+    </div>
+    <?php } ?>
+</div>
 
 <nav aria-label="Page navigation example">
   <ul class="flex items-center -space-x-px h-8 text-sm">
@@ -24,7 +44,7 @@ $products = $productsDb->findAll();
     for($i=1;$i<=$numberOfpages;$i++){
       echo'
       <li>
-        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">'.$i.'</a>
+        <a href="products.php?page='.$i.'" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">'.$i.'</a>
       </li>';
     }
     ?>
@@ -37,18 +57,5 @@ $products = $productsDb->findAll();
     </li>
   </ul>
 </nav>
-<div class="list-container">
-    <div class="list-header">
-        <div>ID</div>
-        <div>Nom</div>
-    </div>
-
-    <?php foreach ($products as $product) { ?>
-    <div class="product-item">
-        <div><?php echo $product['id']; ?></div>
-        <div><a href="/product.php?id=<?php echo $product['id']; ?>"><?php echo $product['name']; ?></a></div>
-    </div>
-    <?php } ?>
-</div>
 
 <?php require_once __DIR__ . '/layout/footer.php'; ?>

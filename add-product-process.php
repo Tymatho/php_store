@@ -51,4 +51,4 @@ if ($stmt === false) {
 session_start();
 $_SESSION['message'] = "Le produit a bien été enregistré";
 
-redirect('/');
+redirect('products.php');
