@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/classes/Database.php';
-require_once __DIR__ . '/functions/utils.php';
-require_once __DIR__ . '/classes/CategoryError.php';
+require_once __DIR__ . '/../../classes/Database.php';
+require_once __DIR__ . '/../utils.php';
+require_once __DIR__ . '/../../classes/errors/CategoryError.php';
 
 if (!isset($_POST['name'])) {
     redirect('/');
@@ -12,7 +12,7 @@ if (!isset($_POST['name'])) {
 $categoryName = trim($_POST['name']);
 
 if (empty($categoryName)) {
-    redirect('/add-category.php?error=' . CategoryError::NAME_REQUIRED);
+    redirect(__DIR__ . '/../../page/add-category.php?error=' . CategoryError::NAME_REQUIRED);
 }
 
 try {
@@ -35,4 +35,4 @@ if ($stmt === false) {
 session_start();
 $_SESSION['message'] = "La catégorie a bien été enregistrée";
 
-redirect('/');
+redirect('/php_store/php_store/page/categories.php');

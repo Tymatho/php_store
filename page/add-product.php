@@ -1,15 +1,15 @@
 <?php
-require_once __DIR__ . '/classes/Categories.php';
-require_once __DIR__ . '/layout/header.php';
+require_once __DIR__ . '/../classes/Categories.php';
+require_once __DIR__ . '/../layout/header.php';
 ?>
 
 <main>
     <h1>Nouveau produit</h1>
 
     <?php if (isset($_GET['error'])) { ?>
-    <p style="color: white; background-color: red;">
-        <?php echo categoryErrorMessage(intval($_GET['error'])); ?>
-    </p>
+        <p style="color: white; background-color: red;">
+            <?php echo categoryErrorMessage(intval($_GET['error'])); ?>
+        </p>
     <?php } ?>
 
     <?php
@@ -17,7 +17,7 @@ require_once __DIR__ . '/layout/header.php';
     $categories = $categoriesDb->findAll();
     ?>
 
-    <form action="add-product-process.php" method="POST" enctype="multipart/form-data">
+    <form action="../functions/process/add-product-process.php" method="POST" enctype="multipart/form-data">
         <div>
             <label for="name">Nom :</label>
             <input type="text" name="name" id="name" />
@@ -28,7 +28,7 @@ require_once __DIR__ . '/layout/header.php';
         </div>
         <div>
             <label for="cover">Image :</label>
-            <input type="file" name="cover" id="cover" accept=".jpg, .jpeg, .png"/>
+            <input type="file" name="cover" id="cover" accept=".jpg, .jpeg, .png" />
         </div>
         <div>
             <label for="description">Description :</label>
@@ -38,9 +38,9 @@ require_once __DIR__ . '/layout/header.php';
             <select name="category" id="category">
                 <option value="0">--- Choisissez une catégorie ---</option>
                 <?php foreach ($categories as $category) { ?>
-                <option value="<?php echo $category['id']; ?>">
-                    <?php echo $category['name']; ?>
-                </option>
+                    <option value="<?php echo $category['id']; ?>">
+                        <?php echo $category['name']; ?>
+                    </option>
                 <?php } ?>
             </select>
         </div>
@@ -50,4 +50,4 @@ require_once __DIR__ . '/layout/header.php';
     </form>
 </main>
 
-<?php require_once __DIR__ . '/layout/footer.php'; ?>
+<?php require_once __DIR__ . '/../layout/footer.php'; ?>
