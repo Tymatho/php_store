@@ -15,5 +15,7 @@ if ($product === null) {
 ?>
 
 <h1><?php echo $product['name']; ?></h1>
+<?php echo '<img src=".\uploaded_files\\'.$product['cover'].'" alt="Image">'; ?>
+
 
 <?php require_once __DIR__ . '/layout/footer.php';

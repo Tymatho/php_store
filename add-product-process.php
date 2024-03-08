@@ -48,9 +48,12 @@ if ($stmt === false) {
     echo "Erreur lors de la requête";
     exit;
 }
-if (move_uploaded_file($_FILES['cover']['tmp_name'], $destination)) {
-    echo $productCover . " correctement enregistré<br />";
-  }
+if(!file_exists($destination.'/'.$productCover)){
+    if (move_uploaded_file($_FILES['cover']['tmp_name'], $destination)) {
+        echo $productCover . " correctement enregistré<br />";
+      }
+}
+
 session_start();
 $_SESSION['message'] = "Le produit a bien été enregistré";
 
