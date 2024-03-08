@@ -4,15 +4,16 @@ require_once __DIR__ . '/classes/Database.php';
 require_once __DIR__ . '/functions/utils.php';
 require_once __DIR__ . '/classes/ProductError.php';
 
-if (!isset($_POST['name']) || !isset($_POST['price']) || !isset($_POST['cover']) || !isset($_POST['description']) || !isset($_POST['category'])) {
+if (!isset($_POST['name']) || !isset($_POST['price']) || !isset($_FILES['cover']) || !isset($_POST['description']) || !isset($_POST['category'])) {
     redirect('/');
 }
 
 $productName = trim($_POST['name']);
 $productPrice = trim($_POST['price']);
-$productCover = trim($_POST['cover']);
+$productCover = trim($_FILES['cover']['name']);
 $productDescription = trim($_POST['description']);
 $productCategory = $_POST['category'];
+$destination = __DIR__ . "./uploaded_files/" . $productCover;
 
 if (empty($productName)) {
     redirect('/add-category.php?error=' . ProductError::NAME_REQUIRED);
@@ -47,7 +48,9 @@ if ($stmt === false) {
     echo "Erreur lors de la requête";
     exit;
 }
-
+if (move_uploaded_file($_FILES['cover']['tmp_name'], $destination)) {
+    echo $productCover . " correctement enregistré<br />";
+  }
 session_start();
 $_SESSION['message'] = "Le produit a bien été enregistré";
 
