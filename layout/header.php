@@ -12,9 +12,14 @@
 
 <body>
     <header>
-    <?php session_start()
-    if(isset($_SESSION['message']) && !empty($_SESSION['message'])){
-        echo $_SESSION['message'];
+        <?php
+        session_start();
+        if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
+        ?>
+        <div class="notification">
+            <?php echo $_SESSION['message']; ?>
+        </div>
+        <?php
         unset($_SESSION['message']);
-    }
+        } ?>
     </header>

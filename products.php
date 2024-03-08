@@ -1,13 +1,13 @@
 <?php
-require_once __DIR__ . '/classes/Categories.php';
+require_once __DIR__ . '/classes/Products.php';
 require_once __DIR__ . '/layout/header.php';
 ?>
 
 <h1>Catégories</h1>
 
 <?php
-$categoriesDb = new Categories();
-$categories = $categoriesDb->findAll();
+$productsDb = new Products();
+$products = $productsDb->findAll();
 ?>
 
 <nav aria-label="Page navigation example">
@@ -20,8 +20,13 @@ $categories = $categoriesDb->findAll();
         </svg>
       </a>
     </li>
-    <?php $numberOfpages = $categoriesDb->getNumberOfObjects();
-    var_dump($numberOfpages);
+    <?php $numberOfpages = ceil($productsDb->getNumberOfObjects() / 5);
+    for($i=1;$i<=$numberOfpages;$i++){
+      echo'
+      <li>
+        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">'.$i.'</a>
+      </li>';
+    }
     ?>
       <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
         <span class="sr-only">Next</span>
@@ -38,10 +43,10 @@ $categories = $categoriesDb->findAll();
         <div>Nom</div>
     </div>
 
-    <?php foreach ($categories as $category) { ?>
-    <div class="category-item">
-        <div><?php echo $category['id']; ?></div>
-        <div><a href="/category.php?id=<?php echo $category['id']; ?>"><?php echo $category['name']; ?></a></div>
+    <?php foreach ($products as $product) { ?>
+    <div class="product-item">
+        <div><?php echo $product['id']; ?></div>
+        <div><a href="/product.php?id=<?php echo $product['id']; ?>"><?php echo $product['name']; ?></a></div>
     </div>
     <?php } ?>
 </div>

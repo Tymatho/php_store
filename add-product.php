@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . '/functions/error.php';
-require_once __DIR__ . '/classes/Database.php';
 require_once __DIR__ . '/classes/Categories.php';
 require_once __DIR__ . '/layout/header.php';
 ?>
@@ -10,9 +8,14 @@ require_once __DIR__ . '/layout/header.php';
 
     <?php if (isset($_GET['error'])) { ?>
     <p style="color: white; background-color: red;">
-        <?php echo productErrorMessage(intval($_GET['error'])); ?>
+        <?php echo categoryErrorMessage(intval($_GET['error'])); ?>
     </p>
     <?php } ?>
+
+    <?php
+    $categoriesDb = new Categories();
+    $categories = $categoriesDb->findAll();
+    ?>
 
     <form action="add-product-process.php" method="POST">
         <div>
@@ -21,26 +24,24 @@ require_once __DIR__ . '/layout/header.php';
         </div>
         <div>
             <label for="price">Prix :</label>
-            <input type="text" name="price_vat_free" id="name" />
+            <input type="text" name="price" id="price" />
         </div>
         <div>
-            <label for="cover">Cover :</label>
-            <input type="text" name="cover" id="name" />
+            <label for="cover">Image :</label>
+            <input type="text" name="cover" id="cover" />
         </div>
         <div>
             <label for="description">Description :</label>
-            <input type="text" name="description" id="name" />
+            <textarea name="description" id="description" cols="30" rows="10"></textarea>
         </div>
         <div>
-            <label for="category_id">Category id :</label>
-            <select name="category_id" id="category-select">
-                <option value="">--Catégories--</option>
-                <?php 
-                    $categories = Categories::findAll();
-                    foreach($categories as $category) {
-                    echo '<option value="'.$category['id'].'">'.$category['name'].'</option>'; 
-                }
-                ?>
+            <select name="category" id="category">
+                <option value="0">--- Choisissez une catégorie ---</option>
+                <?php foreach ($categories as $category) { ?>
+                <option value="<?php echo $category['id']; ?>">
+                    <?php echo $category['name']; ?>
+                </option>
+                <?php } ?>
             </select>
         </div>
         <div>

@@ -12,7 +12,7 @@ if (!isset($_POST['name'])) {
 $categoryName = trim($_POST['name']);
 
 if (empty($categoryName)) {
-    redirect('add-category.php?error=' . CategoryError::NAME_REQUIRED);
+    redirect('/add-category.php?error=' . CategoryError::NAME_REQUIRED);
 }
 
 try {
@@ -32,4 +32,7 @@ if ($stmt === false) {
     exit;
 }
 
-echo "OK ! Catégorie enregistrée";
+session_start();
+$_SESSION['message'] = "La catégorie a bien été enregistrée";
+
+redirect('/');
