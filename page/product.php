@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../classes/Categories.php';
-require_once __DIR__ . '/../layout/CardMaker.php';
 require_once __DIR__ . '/../classes/Products.php';
 require_once __DIR__ . '/../layout/header.php';
 
@@ -19,12 +18,12 @@ if ($product === null) {
 }
 $categoriesDb = new Categories();
 
-CardMaker::createProductCard(
-    $product['name'],
-    $product['price_vat_free'],
-    '..\uploaded_files\\' . $product['cover'],
-    $product['description'],
-    $categoriesDb->find($product['category_id'])['name']
-);
+$name = $product['name'];
+$price =$product['price_vat_free'];
+$img ='..\uploaded_files\\' . $product['cover'];
+$description =$product['description'];
+$category =$categoriesDb->find($product['category_id'])['name'];
+
+require_once __DIR__ . '/../layout/productCardTemplate.php';
 
 require_once __DIR__ . '/../layout/footer.php';

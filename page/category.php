@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../classes/Categories.php';
-require_once __DIR__ . '/../layout/CardMaker.php';
 require_once __DIR__ . '/../layout/header.php';
 
 
@@ -18,6 +17,7 @@ if ($category === null) {
     exit;
 }
 
-CardMaker::createCategoryCard($category['name']);
+$name = $category['name'];
+require_once __DIR__ . '/../layout/categoryCardTemplate.php';
 
 require_once __DIR__ . '/../layout/footer.php';

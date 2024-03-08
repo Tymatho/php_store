@@ -1,8 +1,12 @@
 <?php
 require_once __DIR__ . '/../classes/Categories.php';
 require_once __DIR__ . '/../classes/Settings.php';
-require_once __DIR__ . '/../layout/PaginationMaker.php';
 require_once __DIR__ . '/../layout/header.php';
+
+$actionLocation = "../functions/search.php";
+$type = "category";
+
+require_once __DIR__ . '/../layout/searchBarTemplate.php';
 ?>
 
 <h1>Catégories</h1>
@@ -36,6 +40,8 @@ $categories = $categoriesDb->findWithOffset($categoriePerPage, $offset);
 
 <?php 
 $numberOfpages = ceil($categoriesDb->getNumberOfObjects() / 5);
-PaginationMaker::createPaginationBar('categories.php', 'page', $numberOfpages);
+$page = "categories.php";
+$GETArgumentPage = "page";
+require_once __DIR__ . '/../layout/paginationTemplate.php';
 
 require_once __DIR__ . '/../layout/footer.php'; ?>

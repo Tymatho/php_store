@@ -2,7 +2,11 @@
 require_once __DIR__ . '/../classes/Products.php';
 require_once __DIR__ . '/../classes/Settings.php';
 require_once __DIR__ . '/../layout/header.php';
-require_once __DIR__ . '/../layout/PaginationMaker.php';
+
+$actionLocation = "../functions/search.php";
+$type = "product";
+
+require_once __DIR__ . '/../layout/searchBarTemplate.php';
 ?>
 
 <h1>Produits</h1>
@@ -36,6 +40,8 @@ $products = $productsDb->findWithOffset($productPerPage, $offset);
 <?php
 
 $numberOfpages = ceil($productsDb->getNumberOfObjects() / 5);
-PaginationMaker::createPaginationBar('products.php', 'page', $numberOfpages);
+$page = "products.php";
+$GETArgumentPage = "page";
+require_once __DIR__ . '/../layout/paginationTemplate.php';
 
 require_once __DIR__ . '/../layout/footer.php'; ?>

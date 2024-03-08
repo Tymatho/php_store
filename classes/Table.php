@@ -46,4 +46,16 @@ abstract class Table
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function findByName(string $name): ?array
+    {
+        $stmt = $this->pdo->query("SELECT * FROM ".$this->name." WHERE name LIKE '%".$name."%'");
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($result === false) {
+            return null;
+        }
+
+        return $result;
+    }
 }

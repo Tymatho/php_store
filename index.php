@@ -9,7 +9,7 @@ require_once __DIR__ . '/layout/header.php';
     <ul>
         <li><a href="/">Accueil</a></li>
         <li><a href="./page/categories.php">Catégories</a></li>
-        <li><a href="./page/products.php">Catégories</a></li>
+        <li><a href="./page/products.php">Produits</a></li>
         <li><a href="./page/add-category.php">Nouvelle catégorie</a></li>
         <li><a href="./page/add-product.php">Nouveau produit</a></li>
     </ul>
