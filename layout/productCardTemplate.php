@@ -3,6 +3,6 @@
     <p>Price : <?php echo $price ?>€</p>
     <p><img src="<?php echo $img ?>" alt="Image">
     <p>Description : <?php echo $description ?></p>
-    <p>Category : <?php echo $category ?>
-    </p>
+    <a href="category.php?id=<?php echo $category['id'] ?>" >Category : <?php echo $category['name'] ?>
+    </a>
 </div>

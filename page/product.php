@@ -22,7 +22,7 @@ $name = $product['name'];
 $price =$product['price_vat_free'];
 $img ='..\uploaded_files\\' . $product['cover'];
 $description =$product['description'];
-$category =$categoriesDb->find($product['category_id'])['name'];
+$category =$categoriesDb->find($product['category_id']);
 
 require_once __DIR__ . '/../layout/productCardTemplate.php';
 
