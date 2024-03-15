@@ -1,5 +1,9 @@
 # PHP - CNAM 2024
 
+## Préambule
+
+En essayant de faire du style grâce à Flowbite et Tailwind il se peut que ce ne soit pas très clair à comprendre le site. Il y'a ainsi une navbar en haut de chaque page (sauf pour la page de la recherche de produits/catégories) afin d'accéder facilement aux pages principales.
+
 ## Base de données - Configuration
 
 Créer un fichier `db.ini` dans le dossier `config`, inscrire ensuite vos propres données de configuration :
@@ -31,7 +35,7 @@ on fait un seuil pour savoir combien de pages vont être créer, puis on fait ap
 ## Upload de de la cover d'un produit
 
 Situé dans `page/add-product.php` qui fait appel à `functions/process/add-product-process.php`.
-Ce dernier fichier s'occupe de mettre les valeurs dans la base de données puis de sauvegarder dans le serveur les images. Il n'y a un système d'écrasement de fichier du même nom lors de l'ajout d'un fichier dans le serveur.
+Ce dernier fichier s'occupe de mettre les valeurs dans la base de données puis de sauvegarder dans le serveur les images. Il n'y a un système d'écrasement de fichier du même nom lors de l'ajout d'un fichier dans le serveur. Un fichier `.gitkeep` existe à l'intérieur du dossier `uploaded_files` qui permet de juste pousser le dossier pour les autres développeurs afin d'avoir la même arborescence tout en laissant un dossier vide pour mettre les images que l'on veut.
 
 ## Barre de recherche
 
@@ -40,11 +44,11 @@ La barre de recherche est disponible dans `page/products.php` et `page/categorie
 
 ## Refactor - Clean/Up
 
-J'ai essayé d'organiser les fichiers dans les bons dossiers
+J'ai essayé d'organiser les fichiers dans les bons dossiers, j'ai aussi essayé de mettre des noms compréhensibles et essayer de factoriser un maximum.
 
 ## Renseignements
 
 J'ai beaucoup utilisé :
--ChatGPT pour des exemples
--Votre cours pour approfondir certains sujets
--Le site de TailWind et FlowBite pour essayer de faire du css (je ne suis pas bon dedans donc ça ne se voit pas tant que ça).
+- ChatGPT pour des exemples.
+- Votre cours pour approfondir certains sujets.
+- Le site de TailWind et FlowBite pour essayer de faire du css (je ne suis pas bon dedans donc ça ne se voit pas tant que ça).
